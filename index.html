@@ -3,12 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/circles.css">
     <!-- Paper.js -->
     <script src="libs/paper-full.js"></script>
+    <script type="text/paperscript" canvas="myCanvas">
+        var circles= [];
+        function onKeyDown(e) {
+            var maxPoint = new Point(view.size.width, view.size.height);
+            var randomPoint = Point.random();
+            var point = maxPoint * randomPoint;
+            var circle = new Path.Circle(point, 500);
+            circle.fillColor = 'yellow';
+            circles.push(circle);
+        }
+
+        function onFrame(e) {
+            for(var i=0; i<circles.length; i++) {
+                circles[i].fillColor.hue += 1;
+                circles[i].scale(0.9);
+            }
+        }
+    </script>
     <title>Patatap Dummy</title>
 </head>
 <body>
-    
+    <canvas id="myCanvas"></canvas>
     
 </body>
 </html>
